@@ -49,6 +49,15 @@ $(function(){
                 </div>`
             );
         }
+
+        // 重置預設值
+        resetValue();
+    }
+
+    /* 重置預設值 */
+    function resetValue() {
+        open_count = 0; // 歸 0
+        open_card_array = []; // 清除陣列
     }
 
     /* 計算遊戲時間 */
@@ -96,8 +105,10 @@ $(function(){
         reflushCards();
     });
 
-    /* 卡片點擊事件 */
-    $('.card').on('click', function(){
+    /* 卡片點擊事件: 給未來新增的元素也綁上事件 */
+    $(document).on('click', '.card', function(){
+        console.log("CLICK");
+
         // 紀錄翻開個數
         open_count++;
 
@@ -121,12 +132,10 @@ $(function(){
                 }else{
                     img_1.eq(0).fadeIn();
                     img_2.eq(0).fadeIn();
-                    console.log(img_1.eq(0));
-                    console.log(img_2.eq(0));
                 }
 
-                open_count = 0; // 歸 0
-                open_card_array = []; // 清除陣列
+                // 重置預設值
+                resetValue();
             }, 600);
         }
     });
