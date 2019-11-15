@@ -4,7 +4,13 @@ $(function(){
     // 變數宣告
     //--------------------
     let $card_wrap = $('#main-panel .card-wrap');
+    let $restart_btn = $('#control-panel .restart-btn');
+    let $timer = $('#control-panel .timer');
+    
+    // 卡背圖片
     let img_cover = 'img/cover.jpg';
+    
+    // 圖片種類
     let img_array = [
         'img/test_1.jpg',
         'img/test_2.jpg',
@@ -20,9 +26,6 @@ $(function(){
 
     // 複製雙倍陣列元素
     let dbl_img_array = img_array.concat(img_array);
-
-    let $restart_btn = $('#control-panel .restart-btn');
-    let $timer = $('#control-panel .timer');
 
     // 記錄目前翻開的卡片
     let open_count = 0; // 翻開個數
@@ -62,14 +65,26 @@ $(function(){
 
     /* 計算遊戲時間 */
     function calculatingGameTime() {
-        let today = new Date();
-        let hour = today.getHours();
-        let min = today.getMinutes();
-        let sec = today.getSeconds();
+        let min = 0;
+        let sec = 0;
 
-        $timer.text(`${hour}:${min}:${sec}`);
+        $timer.text(`${formatTime(min)}:${formatTime(sec)}`);
 
-        timer = setTimeout("calculatingGameTime()", 1000);
+        s_timer = setInterval(function(){
+            sec++; // 增加秒數
+            $timer.text(`${formatTime(min)}:${formatTime(sec)}`);
+        }, 1000);
+
+        m_timer = setInterval(function(){
+            min++; // 增加分鐘數
+            $timer.text(`${formatTime(min)}:${formatTime(sec)}`);
+        }, 60000); // 1000ms = 1s ; 1min=60s=60000
+    }
+
+    /* 調整時間顯示格式 */
+    function formatTime(time) {
+        str = time < 10 ? `0${time}` : time;
+        return str;
     }
 
     //--------------------
@@ -93,7 +108,7 @@ $(function(){
     reflushCards();
 
     // 計算遊戲時間
-    // calculatingGameTime();
+    calculatingGameTime();
 
     //--------------------
     // Event Binding
@@ -103,6 +118,9 @@ $(function(){
     $restart_btn.on('click', function(){
         // 刷新卡片順序
         reflushCards();
+
+        // 計算遊戲時間
+        calculatingGameTime();
     });
 
     /* 卡片點擊事件: 給未來新增的元素也綁上事件 */
@@ -110,6 +128,7 @@ $(function(){
         // 紀錄翻開個數
         open_count++;
 
+        // 防止點擊超過兩張
         if(open_count <= 2){
             // 記錄翻開圖片
             open_card_array.push($(this));
@@ -141,9 +160,7 @@ $(function(){
                     resetValue();
                 }, 600);
             }
-        }
-
-        
+        }        
     });
     // $('.card').each(function(index){
         

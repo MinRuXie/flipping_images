@@ -24,7 +24,7 @@ html, body {
     }
 
     a {
-        background-color: darkolivegreen;
+        background-color: #000;
         color: #FFF;
         padding: 10px 20px;
 
@@ -37,7 +37,6 @@ html, body {
 #main-panel {
     width: 100vw;
     height: 90vh;
-    background-color: lightblue;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -45,16 +44,13 @@ html, body {
     .card-wrap {
         width: 80vw;
         height: 80vh;
-        background-color: lightseagreen;
         display: flex;
         flex-wrap: wrap;
+        background-color: gray;
 
         .card {
             width: calc(100% / 5);
             height: calc(100% / 4);
-            background-color: lightsalmon;
-            border: 1px solid #000;
-            box-sizing: border-box;
             position: relative;
             cursor: pointer;
 
