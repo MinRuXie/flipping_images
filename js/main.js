@@ -80,11 +80,6 @@ $(function(){
 
             $timer.text(`${formatTime(min)}:${formatTime(sec)}`);
         }, 1000);
-
-        m_timer = setInterval(function(){
-            min++; // 增加分鐘數
-            $timer.text(`${formatTime(min)}:${formatTime(sec)}`);
-        }, 60000); // 1000ms = 1s ; 1min=60s=60000
     }
 
     /* 調整時間顯示格式 */
