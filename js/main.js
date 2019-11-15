@@ -72,6 +72,12 @@ $(function(){
 
         s_timer = setInterval(function(){
             sec++; // 增加秒數
+
+            if(sec>=60){
+                sec = 0;
+                min++;
+            }
+
             $timer.text(`${formatTime(min)}:${formatTime(sec)}`);
         }, 1000);
 
