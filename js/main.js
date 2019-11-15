@@ -113,18 +113,18 @@ $(function(){
 
             let img_1 = open_card_array[0].find('img');
             let img_2 = open_card_array[1].find('img');
-            
-            // 兩張一樣: 飛走圖案
-            if(img_1.eq(1).attr('src') == img_2.eq(1).attr('src')) {
-                img_1.fadeOut();
-                img_2.fadeOut();
-            // 兩張不一樣: 還原卡背
-            }else{
-                img_1.eq(0).fadeIn();
-                img_2.eq(1).fadeIn();
-            }
-        }else{
 
+            setTimeout(function(){
+                // 兩張一樣: 飛走圖案
+                if(img_1.eq(1).attr('src') == img_2.eq(1).attr('src')) {
+                    img_1.fadeOut();
+                    img_2.fadeOut();
+                // 兩張不一樣: 還原卡背
+                }else{
+                    img_1.eq(0).fadeIn();
+                    img_2.eq(0).fadeIn();
+                }
+            }, 1000);
         }
     });
     // $('.card').each(function(index){
