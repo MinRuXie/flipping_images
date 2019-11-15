@@ -43,9 +43,9 @@ $(function(){
         // 加入卡片圖片
         for(let i=0;i<dbl_img_array.length;i++){
             $card_wrap.append(
-                `<div class="card">
-                    <img src="${img_cover}" />
-                    <img src="${dbl_img_array[i]}" />
+                `<div class="card exist">
+                    <img src="${img_cover}" draggable="false" />
+                    <img src="${dbl_img_array[i]}" draggable="false"/>
                 </div>`
             );
         }
@@ -61,16 +61,16 @@ $(function(){
     }
 
     /* 計算遊戲時間 */
-    // function calculatingGameTime() {
-    //     let today = new Date();
-    //     let hour = today.getHours();
-    //     let min = today.getMinutes();
-    //     let sec = today.getSeconds();
+    function calculatingGameTime() {
+        let today = new Date();
+        let hour = today.getHours();
+        let min = today.getMinutes();
+        let sec = today.getSeconds();
 
-    //     $timer.text(`${hour}:${min}:${sec}`);
+        $timer.text(`${hour}:${min}:${sec}`);
 
-    //     timer = setTimeout("calculatingGameTime()", 1000);
-    // }
+        timer = setTimeout("calculatingGameTime()", 1000);
+    }
 
     //--------------------
     // 外部 function
@@ -106,36 +106,44 @@ $(function(){
     });
 
     /* 卡片點擊事件: 給未來新增的元素也綁上事件 */
-    $(document).on('click', '.card', function(){
+    $(document).on('click', '.exist', function(){
         // 紀錄翻開個數
         open_count++;
 
-        // 記錄翻開圖片
-        open_card_array.push($(this));
+        if(open_count <= 2){
+            // 記錄翻開圖片
+            open_card_array.push($(this));
 
-        // 隱藏卡背圖片
-        $(this).find('img').eq(0).fadeOut();
+            // 隱藏卡背圖片
+            $(this).find('img').eq(0).fadeOut();
 
-        // 選取兩張
-        if(open_card_array.length == 2) {
-            let img_1 = open_card_array[0].find('img');
-            let img_2 = open_card_array[1].find('img');
+            // 選取兩張
+            if(open_card_array.length == 2) {
+                let img_1 = open_card_array[0].find('img');
+                let img_2 = open_card_array[1].find('img');
 
-            setTimeout(function(){
-                // 兩張一樣: 飛走圖案
-                if(img_1.eq(1).attr('src') == img_2.eq(1).attr('src')) {
-                    img_1.fadeOut();
-                    img_2.fadeOut();
-                // 兩張不一樣: 還原卡背
-                }else{
-                    img_1.eq(0).fadeIn();
-                    img_2.eq(0).fadeIn();
-                }
+                setTimeout(function(){
+                    // 兩張一樣: 飛走圖案
+                    if(img_1.eq(1).attr('src') == img_2.eq(1).attr('src')) {
+                        img_1.fadeOut();
+                        img_2.fadeOut();
 
-                // 重置預設值
-                resetValue();
-            }, 600);
+                        // 移除元素事件綁定
+                        open_card_array[0].removeClass('exist');
+                        open_card_array[1].removeClass('exist');
+                    // 兩張不一樣: 還原卡背圖片
+                    }else{
+                        img_1.eq(0).fadeIn();
+                        img_2.eq(0).fadeIn();
+                    }
+
+                    // 重置預設值
+                    resetValue();
+                }, 600);
+            }
         }
+
+        
     });
     // $('.card').each(function(index){
         

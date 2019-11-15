@@ -51,6 +51,7 @@ html, body {
   border: 1px solid #000;
   box-sizing: border-box;
   position: relative;
+  cursor: pointer;
 }
 #main-panel .card-wrap .card img {
   width: 100%;
