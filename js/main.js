@@ -107,8 +107,6 @@ $(function(){
 
     /* 卡片點擊事件: 給未來新增的元素也綁上事件 */
     $(document).on('click', '.card', function(){
-        console.log("CLICK");
-
         // 紀錄翻開個數
         open_count++;
 
