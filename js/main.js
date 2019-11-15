@@ -109,8 +109,6 @@ $(function(){
 
         // 選取兩張
         if(open_card_array.length == 2) {
-            open_count = 0; // 歸 0
-
             let img_1 = open_card_array[0].find('img');
             let img_2 = open_card_array[1].find('img');
 
@@ -123,8 +121,13 @@ $(function(){
                 }else{
                     img_1.eq(0).fadeIn();
                     img_2.eq(0).fadeIn();
+                    console.log(img_1.eq(0));
+                    console.log(img_2.eq(0));
                 }
-            }, 1000);
+
+                open_count = 0; // 歸 0
+                open_card_array = []; // 清除陣列
+            }, 600);
         }
     });
     // $('.card').each(function(index){
