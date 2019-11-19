@@ -70,12 +70,6 @@ $(function(){
         open_card_array = []; // 清除陣列
     }
 
-    // /* 停止計時 */
-    // function stopCalculatingGameTime() {
-    //     // 停止計時器
-    //     clearTimeout(s_timer);
-    // }
-
     /* 計算遊戲時間 */
     function calculatingGameTime() {
         // 重置數值
@@ -213,7 +207,4 @@ $(function(){
             }
         }        
     });
-    // $('.card').each(function(index){
-        
-    // });
 });
