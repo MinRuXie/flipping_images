@@ -9,5 +9,9 @@
 ## 功能介紹
 * 點選相對應的圖片可使圖片消失
 
-## 免費圖庫
+
+## 外部資源
+### 免費圖庫
 * [unsplash](https://unsplash.com/s/photos/fruit)
+### 載入動畫
+https://loading.io/
