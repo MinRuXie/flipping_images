@@ -168,7 +168,7 @@ $(function(){
         
         // 計算遊戲時間
         calculatingGameTime();
-    }, 1000);
+    }, 3000);
 
     
 
