@@ -93,6 +93,7 @@ $(function(){
     function resetValue() {
         open_count = 0; // 歸 0
         open_card_array = []; // 清除陣列
+        cur_img_array = img_array; // 還原陣列
     }
 
     /* 計算遊戲時間 */
@@ -113,8 +114,6 @@ $(function(){
             }
 
             $timer.text(`${formatTime(min)}:${formatTime(sec)}`);
-
-            console.log(cur_img_array);
         }, 1000);
     }
 
