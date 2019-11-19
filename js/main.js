@@ -162,8 +162,15 @@ $(function(){
     // 刷新卡片順序
     reflushCards();
 
-    // 計算遊戲時間
-    calculatingGameTime();
+    setTimeout(function(){
+        // 隱藏載入動畫
+        $('.loading').fadeOut();
+        
+        // 計算遊戲時間
+        calculatingGameTime();
+    }, 1000);
+
+    
 
     //--------------------
     // Event Binding
