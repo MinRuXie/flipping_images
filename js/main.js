@@ -192,7 +192,7 @@ $(function(){
                         setTimeout(function(){
                             // 判斷遊戲進度
                             deterGameProgress();
-                        }, 100);                        
+                        }, 1000);                        
                     // 兩張不一樣: 還原卡背圖片
                     }else{
                         img_1.eq(0).fadeIn();
