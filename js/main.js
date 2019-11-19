@@ -93,7 +93,6 @@ $(function(){
     function resetValue() {
         open_count = 0; // 歸 0
         open_card_array = []; // 清除陣列
-        cur_img_array = img_array; // 還原陣列
     }
 
     /* 計算遊戲時間 */
@@ -129,18 +128,27 @@ $(function(){
             let flag = confirm(`遊戲結束!更花費${min}分${sec}秒\n是否要重新開始?`);
 
             if(flag) {
-                // 刷新卡片順序
-                reflushCards();
-
-                // 停止計時器
-                clearTimeout(s_timer);
-
-                // 計算遊戲時間
-                calculatingGameTime();
+                // 重新開始遊戲
+                restartGame();
             }else{
                 window.close();
             }
         }
+    }
+
+    /* 重新開始遊戲 */
+    function restartGame() {
+        // 還原陣列
+        cur_img_array = img_array;
+
+        // 刷新卡片順序
+        reflushCards();
+
+        // 停止計時器
+        clearTimeout(s_timer);
+
+        // 計算遊戲時間
+        calculatingGameTime();
     }
 
     //--------------------
@@ -177,14 +185,8 @@ $(function(){
 
     /* 重新開始 */
     $restart_btn.on('click', function(){
-        // 刷新卡片順序
-        reflushCards();
-
-        // 停止計時器
-        clearTimeout(s_timer);
-
-        // 計算遊戲時間
-        calculatingGameTime();
+        // 重新開始遊戲
+        restartGame();
     });
 
     /* 卡片點擊事件: 給未來新增的元素也綁上事件 */
