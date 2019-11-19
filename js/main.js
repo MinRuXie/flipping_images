@@ -24,12 +24,19 @@ $(function(){
         'img/test_10.jpg',
     ];
 
-    // 複製雙倍陣列元素
+    // 複製雙倍陣列元素 (生成元素)
     let dbl_img_array = img_array.concat(img_array);
+
+    // 記錄目前場上剩下的卡闢
+    let cur_img_array = img_array;
 
     // 記錄目前翻開的卡片
     let open_count = 0; // 翻開個數
     let open_card_array = []; // 翻開元素
+
+    // 遊戲時間
+    let min = 0;
+    let sec = 0;
 
     //--------------------
     // 自定義 function
@@ -63,13 +70,21 @@ $(function(){
         open_card_array = []; // 清除陣列
     }
 
+    // /* 停止計時 */
+    // function stopCalculatingGameTime() {
+    //     // 停止計時器
+    //     clearTimeout(s_timer);
+    // }
+
     /* 計算遊戲時間 */
     function calculatingGameTime() {
-        let min = 0;
-        let sec = 0;
+        // 重置數值
+        min = 0;
+        sec = 0;
 
         $timer.text(`${formatTime(min)}:${formatTime(sec)}`);
 
+        // 每秒執行
         s_timer = setInterval(function(){
             sec++; // 增加秒數
 
@@ -86,6 +101,26 @@ $(function(){
     function formatTime(time) {
         str = time < 10 ? `0${time}` : time;
         return str;
+    }
+
+    /* 判斷遊戲進度 */
+    function deterGameProgress() {
+        if(cur_img_array.length <= 0) {
+            let flag = confirm(`遊戲結束!更花費${min}分${sec}秒\n是否要重新開始?`);
+
+            if(flag) {
+                // 刷新卡片順序
+                reflushCards();
+
+                // 停止計時器
+                clearTimeout(s_timer);
+
+                // 計算遊戲時間
+                calculatingGameTime();
+            }else{
+                window.close();
+            }
+        }
     }
 
     //--------------------
@@ -120,6 +155,9 @@ $(function(){
         // 刷新卡片順序
         reflushCards();
 
+        // 停止計時器
+        clearTimeout(s_timer);
+
         // 計算遊戲時間
         calculatingGameTime();
     });
@@ -137,6 +175,10 @@ $(function(){
             // 隱藏卡背圖片
             $(this).find('img').eq(0).fadeOut();
 
+            // 暫時移除元素的事件綁定 (為了防止重複點選)
+            open_card_array[0].removeClass('exist');
+            open_card_array[1].removeClass('exist');
+
             // 選取兩張
             if(open_card_array.length == 2) {
                 let img_1 = open_card_array[0].find('img');
@@ -148,13 +190,21 @@ $(function(){
                         img_1.fadeOut();
                         img_2.fadeOut();
 
-                        // 移除元素事件綁定
-                        open_card_array[0].removeClass('exist');
-                        open_card_array[1].removeClass('exist');
+                        // 移除陣列元素
+                        cur_img_array.splice(cur_img_array.indexOf(img_1.eq(1).attr('src')), 1);
+
+                        setTimeout(function(){
+                            // 判斷遊戲進度
+                            deterGameProgress();
+                        }, 100);                        
                     // 兩張不一樣: 還原卡背圖片
                     }else{
                         img_1.eq(0).fadeIn();
                         img_2.eq(0).fadeIn();
+
+                        // 復原元素的事件綁定 (為了防止重複點選)
+                        open_card_array[0].addClass('exist');
+                        open_card_array[1].addClass('exist');
                     }
 
                     // 重置預設值
