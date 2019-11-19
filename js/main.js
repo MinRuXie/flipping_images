@@ -113,6 +113,8 @@ $(function(){
             }
 
             $timer.text(`${formatTime(min)}:${formatTime(sec)}`);
+
+            console.log(cur_img_array);
         }, 1000);
     }
 
@@ -169,8 +171,6 @@ $(function(){
         // 計算遊戲時間
         calculatingGameTime();
     }, 3000);
-
-    
 
     //--------------------
     // Event Binding
