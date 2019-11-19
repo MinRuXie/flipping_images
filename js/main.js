@@ -53,7 +53,10 @@ $(function(){
     let dbl_img_array = img_array.concat(img_array);
 
     // 記錄目前場上剩下的卡闢
-    let cur_img_array = img_array;
+    let cur_img_array = [];
+    for(let p=0;p<img_array.length;p++){
+        cur_img_array.push(img_array[p]);
+    }
 
     // 記錄目前翻開的卡片
     let open_count = 0; // 翻開個數
@@ -139,7 +142,9 @@ $(function(){
     /* 重新開始遊戲 */
     function restartGame() {
         // 還原陣列
-        cur_img_array = img_array;
+        for(let p=0;p<img_array.length;p++){
+            cur_img_array.push(img_array[p]);
+        }
 
         // 刷新卡片順序
         reflushCards();
