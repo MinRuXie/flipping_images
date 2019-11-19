@@ -170,16 +170,18 @@ $(function(){
             $(this).find('img').eq(0).fadeOut();
 
             // 暫時移除元素的事件綁定 (為了防止重複點選)
-            open_card_array[0].removeClass('exist');
-            open_card_array[1].removeClass('exist');
-
+            for(let y=0;y<open_card_array.length;y++){
+                open_card_array[y].removeClass('exist');
+                open_card_array[y].removeClass('exist');
+            }
+           
             // 選取兩張
             if(open_card_array.length == 2) {
                 let img_1 = open_card_array[0].find('img');
                 let img_2 = open_card_array[1].find('img');
 
                 setTimeout(function(){
-                    // 兩張一樣: 飛走圖案
+                    // 兩張一樣: 隱藏元素
                     if(img_1.eq(1).attr('src') == img_2.eq(1).attr('src')) {
                         img_1.fadeOut();
                         img_2.fadeOut();
