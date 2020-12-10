@@ -82,8 +82,8 @@ $(function(){
         for(let i=0;i<dbl_img_array.length;i++){
             $card_wrap.append(
                 `<div class="card exist">
-                    <img src="${img_cover}" draggable="false" />
-                    <img src="${dbl_img_array[i]}" draggable="false"/>
+                    <img class="card-back" src="${img_cover}" draggable="false" />
+                    <img class="card-front" src="${dbl_img_array[i]}" draggable="false"/>
                 </div>`
             );
         }
@@ -195,14 +195,21 @@ $(function(){
     });
 
     /* 卡片點擊事件: 給未來新增的元素也綁上事件 */
-    $(document).on('click', '.exist', function(){
+    $(document).on('click', '.exist', function(){    
         // 紀錄翻開個數
         open_count++;
+
+        // 翻牌效果: 清除
+        $(this).removeClass('flipped-b-to-f');
+        $(this).removeClass('flipped-f-to-b');
 
         // 防止點擊超過兩張
         if(open_count <= 2){
             // 記錄翻開圖片
             open_card_array.push($(this));
+
+            // 翻牌效果: 反到正
+            $(this).addClass('flipped-b-to-f');
 
             // 隱藏卡背圖片
             $(this).find('img').eq(0).fadeOut();
@@ -233,6 +240,12 @@ $(function(){
                         }, 1000);                        
                     // 兩張不一樣: 還原卡背圖片
                     }else{
+                        // 翻牌效果: 正到反
+                        for(let y=0;y<open_card_array.length;y++){
+                            open_card_array[y].addClass('flipped-f-to-b');
+                            open_card_array[y].addClass('flipped-f-to-b');
+                        }
+                        
                         img_1.eq(0).fadeIn();
                         img_2.eq(0).fadeIn();
 
