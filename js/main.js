@@ -12,22 +12,26 @@ $(function(){
     let $history_list = $('#js-history-list');
     
     // 卡背圖片
-    let img_cover = 'img/cover.jpg';
+    let img_cover = 'img/card_back.png';
     
     // 圖片種類
     let img_array = [
-        'img/test_1.jpg',
-        'img/test_2.jpg',
-        'img/test_3.jpg',
-        'img/test_4.jpg',
-        'img/test_5.jpg',
-        'img/test_6.jpg',
-        'img/test_7.jpg',
-        'img/test_8.jpg',
-        'img/test_9.jpg',
-        'img/test_10.jpg',
-        'img/test_11.jpg',
-        'img/test_12.jpg'
+        'img/card_1.png',
+        'img/card_2.png',
+        'img/card_3.png',
+        'img/card_4.png',
+        'img/card_5.png',
+        'img/card_6.png',
+        'img/card_7.png',
+        'img/card_8.png',
+        'img/card_9.png',
+        'img/card_10.png',
+        'img/card_11.png',
+        'img/card_12.png',
+        'img/card_13.png',
+        'img/card_14.png',
+        'img/card_15.png',
+        'img/card_16.png',
     ];
 
     // 要使用幾種圖案
@@ -202,11 +206,11 @@ $(function(){
             // 記錄翻開圖片
             open_card_array.push($(this));
 
-            // 翻牌效果: 反到正
-            $(this).addClass('flipped-b-to-f');
-
             // 隱藏卡背圖片
             $(this).find('img').eq(0).fadeOut();
+
+            // 翻牌效果: 反到正
+            $(this).addClass('flipped-b-to-f');
 
             // 暫時移除元素的事件綁定 (為了防止重複點選)
             for(let y=0 ; y < open_card_array.length ; y++) {
@@ -234,14 +238,14 @@ $(function(){
                         }, 500);
                     // 兩張不一樣: 還原卡背圖片
                     } else {
+                        img_1.eq(0).fadeIn();
+                        img_2.eq(0).fadeIn();
+
                         // 翻牌效果: 正到反
                         for(let y=0 ; y < open_card_array.length ; y++) {
                             open_card_array[y].addClass('flipped-f-to-b');
                             open_card_array[y].addClass('flipped-f-to-b');
                         }
-                        
-                        img_1.eq(0).fadeIn();
-                        img_2.eq(0).fadeIn();
 
                         // 復原元素的事件綁定 (為了防止重複點選)
                         open_card_array[0].addClass('exist');
@@ -251,7 +255,7 @@ $(function(){
                     // 重置預設值
                     open_count = 0; // 歸 0
                     open_card_array = []; // 清除陣列
-                }, 600);
+                }, 800);
             }
         }        
     });
