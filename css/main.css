@@ -2,6 +2,7 @@
 * {
   -webkit-font-smoothing: antialiased;
   font-family: "PingFang TC", "Microsoft JhengHei", sans-serif;
+  box-sizing: border-box;
 }
 
 html, body {
@@ -12,69 +13,95 @@ html, body {
   user-select: none;
 }
 
-#control-panel {
-  width: 100vw;
-  height: 10vh;
+.game-wrap {
+  width: 100%;
+  height: 100vh;
+  min-width: 1920px;
+  min-height: 900px;
+  display: grid;
+  grid-template-columns: 85% 15%;
+}
+
+.control-panel {
+  width: 100%;
+  height: 100%;
+  grid-area: 1 span;
   background-color: lightslategray;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
+  flex-direction: column;
+  padding: 60px 20px;
 }
-#control-panel span {
-  font-size: 18px;
+.control-panel .time-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.control-panel .time-wrap span {
+  font-size: 38px;
   font-weight: 700;
-  margin-right: 10px;
 }
-#control-panel a {
+.control-panel .history-wrap {
+  width: 100%;
+}
+.control-panel .restart-btn {
   background-color: #000;
   color: #FFF;
-  padding: 10px 20px;
   text-decoration: none;
+  font-size: 20px;
+  padding: 10px 30px;
+  border-radius: 100px;
   transition: 0.3s;
 }
-#control-panel a:hover {
+.control-panel .restart-btn:hover {
   color: #999;
 }
 
-#main-panel {
-  width: 100vw;
-  height: 90vh;
+.main-panel {
+  width: 100%;
+  height: 100%;
+  grid-area: 1 span;
   display: flex;
   align-items: center;
   justify-content: center;
 }
-#main-panel .card-wrap {
-  width: 80vw;
-  height: 80vh;
-  display: flex;
-  flex-wrap: wrap;
-  padding: 0 10px 10px 0;
+.main-panel .card-wrap {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  grid-column-gap: 10px;
+  align-items: center;
+  padding: 20px;
   background-image: url(../img/bg.jpg);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: 50% 50%;
 }
-#main-panel .card-wrap .card {
-  width: calc((100% - 50px) / 5);
-  height: calc((100% - 40px) / 4);
+.main-panel .card-wrap .card {
+  width: 170px;
+  height: 220px;
   position: relative;
-  cursor: pointer;
-  margin: 10px 0 0 10px;
   overflow: hidden;
   border-radius: 10px;
+  margin: auto;
   /*preserve the back when fliping*/
   transform-style: preserve-3d;
   transition: 0.5s all ease;
 }
-#main-panel .card-wrap .card.flipped-b-to-f {
+.main-panel .card-wrap .card.exist {
+  cursor: pointer;
+}
+.main-panel .card-wrap .card.flipped-b-to-f {
   /*flip card-back behind card-front*/
   transform: rotateY(180deg);
 }
-#main-panel .card-wrap .card.flipped-f-to-b {
+.main-panel .card-wrap .card.flipped-f-to-b {
   /*flip card-back behind card-front*/
   transform: rotateY(0);
 }
-#main-panel .card-wrap .card img {
+.main-panel .card-wrap .card img {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -82,31 +109,40 @@ html, body {
   top: 0;
   left: 0;
 }
-#main-panel .card-wrap .card img:nth-child(0) {
+.main-panel .card-wrap .card img.card-back {
   z-index: 2;
 }
-#main-panel .card-wrap .card img:nth-child(1) {
+.main-panel .card-wrap .card img.card-front {
   z-index: 1;
 }
 
 .loading {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   background: #FFF;
   width: 100%;
   height: 100%;
   z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.loading .start-btn {
+  cursor: pointer;
+  background-color: #000;
+  color: #FFF;
+  font-size: 30px;
+  border-radius: 100px;
+  padding: 20px 50px;
+  transition: 0.3s;
+}
+.loading .start-btn:hover {
+  padding: 20px 70px;
 }
 .loading img {
-  position: absolute;
   width: 10%;
-  top: 40%;
-  left: 50%;
-  transform: translateY(-50%);
-  /* 扣掉自己的 50% 高度 */
-  transform: translateX(-50%);
-  /* 扣掉自己的 50% 高度 */
 }
 
 /*# sourceMappingURL=main.css.map */

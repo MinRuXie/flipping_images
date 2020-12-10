@@ -1,6 +1,7 @@
 * {
     -webkit-font-smoothing: antialiased;
     font-family: 'PingFang TC', 'Microsoft JhengHei', sans-serif;
+    box-sizing: border-box;
 }
 
 html, body {
@@ -12,26 +13,48 @@ html, body {
     user-select: none;
 }
 
-#control-panel {
-    width: 100vw;
-    height: 10vh;
-    background-color: lightslategray;
+.game-wrap {
+    width: 100%;
+    height: 100vh;
+    min-width: 1920px;
+    min-height: 900px;
+    display: grid;
+    grid-template-columns: 85% 15%;
+}
 
+.control-panel {
+    width: 100%;
+    height: 100%;
+    grid-area: 1 span;
+    background-color: lightslategray;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
+    flex-direction: column;
+    padding: 60px 20px;
 
-    span {
-        font-size: 18px;
-        font-weight: 700;
-        margin-right: 10px;
+    .time-wrap {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        span {
+            font-size: 38px;
+            font-weight: 700;
+        }
     }
 
-    a {
+    .history-wrap {
+        width: 100%;
+    }
+
+    .restart-btn {
         background-color: #000;
         color: #FFF;
-        padding: 10px 20px;
         text-decoration: none;
+        font-size: 20px;
+        padding: 10px 30px;
+        border-radius: 100px;
         transition: 0.3s;
 
         &:hover {
@@ -40,37 +63,43 @@ html, body {
     }
 }
 
-#main-panel {
-    width: 100vw;
-    height: 90vh;
+.main-panel {
+    width: 100%;
+    height: 100%;
+    grid-area: 1 span;
     display: flex;
     align-items: center;
     justify-content: center;
 
     .card-wrap {
-        width: 80vw;
-        height: 80vh;
-        display: flex;
-        flex-wrap: wrap;
-        padding: 0 10px 10px 0;
+        width: 100%;
+        height: 100%;
+        display: grid;
+        grid-template-columns: repeat(8, 1fr);
+        grid-column-gap: 10px;
+        align-items: center;
+        padding: 20px;
         background-image: url(../img/bg.jpg);
         background-repeat: no-repeat;
         background-size: cover;
         background-position: 50% 50%;
 
         .card {
-            width: calc((100% - 50px) / 5);
-            height: calc((100% - 40px) / 4);
+            width: 170px;
+            height: 220px;
             position: relative;
-            cursor: pointer;
-            margin: 10px 0 0 10px;
             overflow: hidden;
             border-radius: 10px;
+            margin: auto;
             // box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
 
             /*preserve the back when fliping*/
             transform-style: preserve-3d;
             transition: 0.5s all ease;
+
+            &.exist {
+                cursor: pointer;
+            }
 
             &.flipped-b-to-f {          
                 /*flip card-back behind card-front*/
@@ -90,10 +119,10 @@ html, body {
                 top: 0;
                 left: 0;
 
-                &:nth-child(0) {
+                &.card-back {
                     z-index: 2;
                 }
-                &:nth-child(1) {
+                &.card-front {
                     z-index: 1;
                 }
             }
@@ -102,20 +131,41 @@ html, body {
 }
 
 .loading {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     background: #FFF;
     width: 100%;
     height: 100%;
     z-index: 999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    .start-btn {
+        // position: absolute;
+        // top: 70%;
+        // left: 50%;
+        // transform: translate(-50%, -50%);
+        cursor: pointer;
+        background-color: #000;
+        color: #FFF;
+        font-size: 30px;
+        border-radius: 100px;
+        padding: 20px 50px;
+        transition: 0.3s;
+
+        &:hover {
+            padding: 20px 70px;
+        }
+    }
 
     img {
-        position: absolute;
+        // position: absolute;
         width: 10%;
-        top: 40%;
-        left: 50%;
-        transform: translateY(-50%); /* 扣掉自己的 50% 高度 */
-        transform: translateX(-50%); /* 扣掉自己的 50% 高度 */
+        // top: 40%;
+        // left: 50%;
+        // transform: translate(-50%, -50%);
     }
 }
