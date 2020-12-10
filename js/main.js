@@ -231,7 +231,7 @@ $(function(){
                         setTimeout(function() {
                             // 判斷遊戲進度
                             deterGameProgress();
-                        }, 1000);
+                        }, 500);
                     // 兩張不一樣: 還原卡背圖片
                     } else {
                         // 翻牌效果: 正到反
