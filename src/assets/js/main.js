@@ -12,7 +12,10 @@ fetch('src/assets/data/images.json').then(function (response) {
         img.src = image;
     }
 
-    let pics = data.card_fronts;
+    let pics = [];
+    for(let i=0 ; i < data.card_fronts.length ; i++){
+        pics.push(data.card_fronts[i]);
+    }
     pics.push(data.card_back);
     pics.push(data.game_cover);
     pics.push(data.game_bg);
@@ -20,7 +23,6 @@ fetch('src/assets/data/images.json').then(function (response) {
     for (let i=0; i<pics.length ; i++) {
         preloadImg(pics[i]);
     }
-
     
     // HTML 讀取後執行
     $(function(){
@@ -31,7 +33,6 @@ fetch('src/assets/data/images.json').then(function (response) {
         let $history_list = $('#js-history-list');
         let $game_cover_back = $('#js-game-cover-back');
 
-        
         // 要使用幾種圖案
         let img_type_count = 12;
 
@@ -137,7 +138,6 @@ fetch('src/assets/data/images.json').then(function (response) {
                 // 紀錄成績
                 scores.push({'sec': min*60+sec, 'name': person});
                 scores.sort(sortIdAsc);
-                console.log(scores);
 
                 $history_list.empty();
                 for(let i=0 ; i < scores.length ; i++) {
@@ -179,11 +179,9 @@ fetch('src/assets/data/images.json').then(function (response) {
         }).on('mouseenter', function(){
             // 出現動畫
             $game_cover_back.addClass('show');
-            console.log('mouseenter');
         }).on('mouseleave', function(){
             // 動畫消失
             $game_cover_back.removeClass('show');
-            console.log('mouseleave');
         });
 
         /* 重新開始 */
