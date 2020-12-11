@@ -126,7 +126,6 @@ img {
             overflow: hidden;
             border-radius: 10px;
             margin: auto;
-            box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
 
             /*preserve the back when fliping*/
             transform-style: preserve-3d;
@@ -134,6 +133,7 @@ img {
 
             &.exist {
                 cursor: pointer;
+                box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
             }
 
             &.flipped-b-to-f {          
