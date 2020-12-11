@@ -150,6 +150,7 @@ img {
                 &.card-back {
                     z-index: 2;
                     backface-visibility: hidden;
+                    background-color: $color-white;
                 }
                 
                 &.card-front {
@@ -214,6 +215,7 @@ img {
                 object-fit: cover;
                 border-radius: 10px;
                 box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+                background-color: $color-white;
             }
 
             &.back {
