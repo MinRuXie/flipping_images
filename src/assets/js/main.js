@@ -12,10 +12,7 @@ fetch('src/assets/data/images.json').then(function (response) {
         img.src = image;
     }
 
-    let pics = [];
-    for(let i=0 ; i < data.card_fronts.length ; i++){
-        pics.push(data.card_fronts[i]);
-    }
+    let pics = img_array.slice();
     pics.push(data.card_back);
     pics.push(data.game_cover);
     pics.push(data.game_bg);
@@ -61,16 +58,13 @@ fetch('src/assets/data/images.json').then(function (response) {
         /* 建立遊戲卡片 */
         function createCards() {
             // 複製一份
-            let copy_img_array = img_array;
+            let copy_img_array = img_array.slice();
 
             // 亂數排序陣列元素
             shuffle(copy_img_array);
 
             // 取出此回合的 X 種圖片
-            let new_img_array = [];
-            for(let i=0 ; i < img_type_count ; i++) {
-                new_img_array.push(copy_img_array[i]);
-            }
+            let new_img_array = copy_img_array.slice(0, img_type_count);
 
             // 複製雙倍陣列元素 (生成元素)
             dbl_img_array = new_img_array.concat(new_img_array);
