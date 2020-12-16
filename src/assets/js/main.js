@@ -101,7 +101,7 @@ fetch('src/assets/data/images.json').then(function (response) {
             min = 0;
             sec = 0;
 
-            $timer.text(`${formatTime(min)}:${formatTime(sec)}`);
+            $timer.text(`${min.toString().padStart(2, 0)}:${sec.toString().padStart(2, 0)}`);
 
             // 每秒執行
             s_timer = setInterval(function() {
@@ -112,14 +112,8 @@ fetch('src/assets/data/images.json').then(function (response) {
                     min++;
                 }
 
-                $timer.text(`${formatTime(min)}:${formatTime(sec)}`);
+                $timer.text(`${min.toString().padStart(2, 0)}:${sec.toString().padStart(2, 0)}`);
             }, 1000);
-        }
-
-        /* 調整時間顯示格式 */
-        function formatTime(time) {
-            let str = time < 10 ? `0${time}` : time;
-            return str;
         }
 
         /* 判斷遊戲進度 */
@@ -136,7 +130,7 @@ fetch('src/assets/data/images.json').then(function (response) {
                 }
 
                 // 紀錄成績
-                scores.push({'sec': min*60+sec, 'name': person});
+                scores.push({'sec': min * 60 + sec, 'name': person});
                 scores.sort(sortIdAsc);
 
                 $history_list.empty();
