@@ -23,6 +23,12 @@ fetch('src/assets/data/images.json').then(function (response) {
     
     // HTML 讀取後執行
     $(function(){
+        let bg_player = document.getElementById('js-bg-player');
+        bg_player.loop = true;
+        let correct_player = document.getElementById('js-correct-player');
+        let incorrect_player = document.getElementById('js-incorrect-player');
+        let flipping_player = document.getElementById('js-flipping-player');
+
         let $start_btn = $('#js-start-btn');
         let $card_wrap = $('#js-card-wrap');
         let $restart_btn = $('#js-restart-btn');
@@ -185,7 +191,10 @@ fetch('src/assets/data/images.json').then(function (response) {
         });
 
         /* 卡片點擊事件: 給未來新增的元素也綁上事件 */
-        $(document).on('click', '.exist', function() {    
+        $(document).on('click', '.exist', function() {
+            flipping_player.currentTime = 0;
+            flipping_player.play();
+
             // 紀錄翻開個數
             open_count++;
 
@@ -218,6 +227,10 @@ fetch('src/assets/data/images.json').then(function (response) {
                     setTimeout(function() {
                         // 兩張一樣: 隱藏元素
                         if(img_1.eq(1).attr('src') == img_2.eq(1).attr('src')) {
+                            // 播放音效
+                            correct_player.currentTime = 0;
+                            correct_player.play();
+                            
                             img_1.fadeOut();
                             img_2.fadeOut();
 
@@ -230,6 +243,10 @@ fetch('src/assets/data/images.json').then(function (response) {
                             }, 500);
                         // 兩張不一樣: 還原卡背圖片
                         } else {
+                            // 播放音效
+                            incorrect_player.currentTime = 0;
+                            incorrect_player.play();
+                            
                             img_1.eq(0).fadeIn();
                             img_2.eq(0).fadeIn();
 
