@@ -27,13 +27,13 @@ project
     |       |- js
     |       |   |- main.js
     |       |
-    |       |- img
     |       |
     |       |- data
     |           |- images.json
     |
     |- dist (production)
     |   |- assets
+    |       |- img
     |       |- audio
     |       |- css
     |       |- js
@@ -52,8 +52,8 @@ gulp build
 ```
 
 ## Update Data Method
-* Add new images url to `images.json`.
-* Add new images file to `img` folder.
+* Add new images url to `src/assets/data/images.json`.
+* Add new images file to `dist/assets/img` folder.
 
 
 ## 音效檔案來源 (未補檔)
