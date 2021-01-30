@@ -56,8 +56,8 @@ gulp build
 * Add new images file to `dist/assets/img` folder.
 
 
-## 音效檔案來源 (未補檔)
+## 音效檔案來源
 * 背景音樂
-* 正確
-* 錯誤
-* 翻牌聲
+* `corret.wav` https://freesound.org/people/Beetlemuse/sounds/528957/
+* `incorrect.wav` https://freesound.org/people/Bertrof/sounds/131657/
+* `flipping.wav` https://freesound.org/people/InspectorJ/sounds/416179/
