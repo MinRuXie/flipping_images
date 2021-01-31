@@ -58,6 +58,12 @@ gulp build
 
 ## 音效檔案來源
 * 背景音樂
-* `corret.wav` https://freesound.org/people/Beetlemuse/sounds/528957/
-* `incorrect.wav` https://freesound.org/people/Bertrof/sounds/131657/
-* `flipping.wav` https://freesound.org/people/InspectorJ/sounds/416179/
+    - 來源：
+* `corret.wav`
+    - 來源：[Correct Answer / That's Right!](https://freesound.org/people/Beetlemuse/sounds/528957/)
+* `incorrect.wav`
+    - 來源：[Game Sounds » Game Sound Wrong.wav](https://freesound.org/people/Bertrof/sounds/131657/)
+* `flipping.wav`
+    - 來源：[Book, Flipping Through Pages, A.wav](https://freesound.org/people/InspectorJ/sounds/416179/)
+* `start.ogg`
+    - 來源：[Arcade » Game Start](https://freesound.org/people/plasterbrain/sounds/243020/)

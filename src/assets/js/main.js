@@ -28,6 +28,7 @@ fetch('src/assets/data/images.json').then(function (response) {
         let correct_player = document.getElementById('js-correct-player');
         let incorrect_player = document.getElementById('js-incorrect-player');
         let flipping_player = document.getElementById('js-flipping-player');
+        let start_player = document.getElementById('js-start-player');
 
         let $start_btn = $('#js-start-btn');
         let $card_wrap = $('#js-card-wrap');
@@ -164,7 +165,10 @@ fetch('src/assets/data/images.json').then(function (response) {
         //--------------------
 
         /* 開始遊戲 */
-        $start_btn.on('click', function() {   
+        $start_btn.on('click', function() {
+            start_player.currentTime = 0;
+            start_player.play();
+
             // 隱藏載入動畫
             $('.loading').fadeOut();
                 
@@ -180,6 +184,9 @@ fetch('src/assets/data/images.json').then(function (response) {
 
         /* 重新開始 */
         $restart_btn.on('click', function() {
+            start_player.currentTime = 0;
+            start_player.play();
+
             // 停止計時器 (重新開局)
             clearInterval(s_timer);
 
