@@ -58,7 +58,7 @@ gulp build
 
 ## 音效檔案來源
 * 背景音樂
-    - 來源：
+    - 來源：[西野加奈／喜歡你的理由 (中文字幕短版MV)](https://www.youtube.com/watch?v=9FCCYhLi6sc&list=LLfbRY728DLyrjq2eRlkvA_w&index=516)
 * `corret.wav`
     - 來源：[Correct Answer / That's Right!](https://freesound.org/people/Beetlemuse/sounds/528957/)
 * `incorrect.wav`
