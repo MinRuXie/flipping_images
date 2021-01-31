@@ -1,6 +1,5 @@
 {
     "game_cover": "dist/assets/img/card_0.png",
-    "game_bg": "dist/assets/img/bg.jpg",
     "card_back": "dist/assets/img/card_back.png",
     "card_fronts": [
         "dist/assets/img/card_1.png",

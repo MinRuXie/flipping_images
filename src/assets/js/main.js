@@ -15,7 +15,6 @@ fetch('src/assets/data/images.json').then(function (response) {
     let pics = img_array.slice();
     pics.push(data.card_back);
     pics.push(data.game_cover);
-    pics.push(data.game_bg);
 
     for (let i=0; i<pics.length ; i++) {
         preloadImg(pics[i]);
