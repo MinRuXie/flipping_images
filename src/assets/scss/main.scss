@@ -274,18 +274,12 @@ img {
         justify-content: center;
         position: absolute;
 
-        &::before {
-            content: '';
-            margin-bottom: 40px;
+        .image-wrap {
+            margin: 40px 0;
             width: 500px;
             height: 500px;
             background-repeat: no-repeat;
             background-size: contain;
-            background-image: url('../img/reward.png');
-        }
-
-        .btn {
-            margin-top: 30px;
         }
     }
 }

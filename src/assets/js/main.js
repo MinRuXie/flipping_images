@@ -166,8 +166,11 @@ fetch('src/assets/data/images.json').then(function (response) {
             $reward_wrap.append(`
                 <div class="reward-content">
                     恭喜破關成功！
+                    <div id="js-image-wrap" class="image-wrap"></div>
                     <div id="js-close-btn" class="btn">我收下了</div>
                 </div>`);
+
+            $('#js-image-wrap').css('background-image', 'url("../dist/assets/img/reward.png")');
 
             $('#js-close-btn').on('click', function() {
                 $reward_wrap.empty();
