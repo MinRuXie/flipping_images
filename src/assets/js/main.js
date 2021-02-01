@@ -32,9 +32,11 @@ fetch('src/assets/data/images.json').then(function (response) {
         let $start_btn = $('#js-start-btn');
         let $card_wrap = $('#js-card-wrap');
         let $restart_btn = $('#js-restart-btn');
+
         let $timer = $('#js-timer');
         let $history_list = $('#js-history-list');
         let $game_cover_back = $('#js-game-cover-back');
+        let $reward_wrap = $('#js-reward-wrap');
 
         // 要使用幾種圖案
         let img_type_count = 12;
@@ -117,28 +119,55 @@ fetch('src/assets/data/images.json').then(function (response) {
         }
 
         /* 判斷遊戲進度 */
-        function deterGameProgress() {
+        async function deterGameProgress() {
             if(cur_img_array.length <= 0) {
                 // 停止計時器
-                clearInterval(s_timer);
-                
-                // 玩家姓名
-                let person = prompt(`遊戲結束！共花費${min}分${sec}秒！\n請輸入您的大名：`, "讓我想想");
-
-                if(person == null) {
-                    person = "無名氏";
-                }
+                await clearInterval(s_timer);
 
                 // 紀錄成績
-                scores.push({'sec': min * 60 + sec, 'name': person});
-                scores.sort(sortIdAsc);
+                await recordScore();
 
-                $history_list.empty();
-                for(let i=0 ; i < scores.length ; i++) {
-                    $history_list.append(`<li>${scores[i].name} ${scores[i].sec}秒</li>`);
-                }
+                // 獲得獎勵
+                getReward();
             }
         }
+
+        /* 紀錄成績 */
+        function recordScore() {
+            // 玩家姓名
+            let person = prompt(`遊戲結束！共花費${min}分${sec}秒！\n請輸入您的大名：`, "讓我想想");
+
+            if(person == null) {
+                person = "無名氏";
+            }
+
+            scores.push({'sec': min * 60 + sec, 'name': person});
+            scores.sort(sortIdAsc);
+
+            $history_list.empty();
+            for(let i=0 ; i < scores.length ; i++) {
+                $history_list.append(`<li>${scores[i].name} ${scores[i].sec}秒</li>`);
+            }
+        }
+
+        /* 獲得獎勵 */
+        function getReward() {
+            $reward_wrap.addClass('show');
+            $reward_wrap.append(`<div class="reward-content">恭喜破關成功！<div id="js-close-btn" class="btn">我收下了</div></div>`);
+
+
+            $('#js-close-btn').on('click', function() {
+                $reward_wrap.empty();
+                $reward_wrap.removeClass('show');
+            });
+        }
+
+        /* 重置預設值 */
+        function resetGame() {
+            open_count = 0; // 歸 0
+            open_card_array = []; // 清除陣列
+        }
+
 
         //--------------------
         // 外部 function
@@ -194,6 +223,9 @@ fetch('src/assets/data/images.json').then(function (response) {
 
             // 計算遊戲時間
             calculatingGameTime();
+
+            // 重置預設值
+            resetGame();
         });
 
         /* 卡片點擊事件: 給未來新增的元素也綁上事件 */
@@ -247,6 +279,30 @@ fetch('src/assets/data/images.json').then(function (response) {
                                 // 判斷遊戲進度
                                 deterGameProgress();
                             }, 500);
+
+                            // new Promise(function(myResolve, myReject) {
+                            //     // 播放音效
+                            //     correct_player.currentTime = 0;
+                            //     correct_player.play();
+                                
+                            //     img_1.fadeOut();
+                            //     img_2.fadeOut();
+
+                            //     // 移除陣列元素
+                            //     cur_img_array.splice(cur_img_array.indexOf(img_1.eq(1).attr('src')), 1);
+                                
+                            //     myResolve(); // when successful
+                            //     myReject();  // when error
+                            // }).then(
+                            //     function(value) {
+                            //         // 判斷遊戲進度
+                            //         deterGameProgress();
+                            //     },
+                            //     function(error) { /* code if some error */ }
+                            // );
+
+
+
                         // 兩張不一樣: 還原卡背圖片
                         } else {
                             // 播放音效
@@ -268,11 +324,10 @@ fetch('src/assets/data/images.json').then(function (response) {
                         }
 
                         // 重置預設值
-                        open_count = 0; // 歸 0
-                        open_card_array = []; // 清除陣列
+                        resetGame();
                     }, 800);
                 }
-            }        
+            }
         });
 
 
