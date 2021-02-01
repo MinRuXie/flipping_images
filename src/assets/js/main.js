@@ -39,7 +39,7 @@ fetch('src/assets/data/images.json').then(function (response) {
         let $reward_wrap = $('#js-reward-wrap');
 
         // 要使用幾種圖案
-        let img_type_count = 12;
+        let img_type_count = 1;
 
         // 複製雙倍陣列元素 (生成元素) 
         let dbl_img_array = [];
@@ -166,11 +166,11 @@ fetch('src/assets/data/images.json').then(function (response) {
             $reward_wrap.append(`
                 <div class="reward-content">
                     恭喜破關成功！
-                    <div id="js-image-wrap" class="image-wrap"></div>
+                    <div class="image-wrap"></div>
                     <div id="js-close-btn" class="btn">我收下了</div>
                 </div>`);
 
-            $('#js-image-wrap').css('background-image', 'url("../dist/assets/img/reward.png")');
+            $('#js-image-wrap').addClass('show');
 
             $('#js-close-btn').on('click', function() {
                 $reward_wrap.empty();
