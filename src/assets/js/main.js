@@ -16,7 +16,7 @@ fetch('src/assets/data/images.json').then(function (response) {
     pics.push(data.card_back);
     pics.push(data.game_cover);
 
-    for (let i=0; i<pics.length ; i++) {
+    for (let i=0; i < pics.length ; i++) {
         preloadImg(pics[i]);
     }
     
@@ -39,7 +39,7 @@ fetch('src/assets/data/images.json').then(function (response) {
         let $reward_wrap = $('#js-reward-wrap');
 
         // 要使用幾種圖案
-        let img_type_count = 1;
+        let img_type_count = 12;
 
         // 複製雙倍陣列元素 (生成元素) 
         let dbl_img_array = [];
