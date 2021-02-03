@@ -164,9 +164,20 @@ img {
     }
 }
 
-.loading {
+.loading-warp {
     background-color: $color-white;
-    z-index: 999;
+    z-index: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    font-weight: bold;
+    letter-spacing: 0.3px;
+}
+
+.ready-warp {
+    background-color: $color-white;
+    z-index: 700;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -236,7 +247,7 @@ img {
     display: none;
     background-color: $color-black;
     color: $color-white;
-    z-index: 9999;
+    z-index: 900;
 
     @media screen and (max-height: 749px), screen and (max-width: 1399px) {
         display: flex;

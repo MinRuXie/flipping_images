@@ -5,7 +5,6 @@ fetch('src/assets/data/images.json').then(function (response) {
     let img_cover = data.card_back; // 卡背圖片
     let img_array = data.card_fronts; // 圖片種類
     
-
     /* preload images */
     function preloadImg(image) {
         let img = new Image();
@@ -22,8 +21,8 @@ fetch('src/assets/data/images.json').then(function (response) {
     
     // HTML 讀取後執行
     $(function(){
-        let bg_player = document.getElementById('js-bg-player');
-        bg_player.loop = true;
+        // let bg_player = document.getElementById('js-bg-player');
+        // bg_player.loop = true;
         let correct_player = document.getElementById('js-correct-player');
         let incorrect_player = document.getElementById('js-incorrect-player');
         let flipping_player = document.getElementById('js-flipping-player');
@@ -218,8 +217,8 @@ fetch('src/assets/data/images.json').then(function (response) {
             start_player.currentTime = 0;
             start_player.play();
 
-            // 隱藏載入動畫
-            $('#js-loading').fadeOut();
+            // 隱藏準備畫面
+            $('#js-ready').fadeOut();
                 
             // 計算遊戲時間
             calculatingGameTime();
@@ -343,6 +342,10 @@ fetch('src/assets/data/images.json').then(function (response) {
         // 建立遊戲卡片
         createCards();
     });
+})
+.then(function () {
+    // 隱藏載入畫面
+    $('#js-loading').fadeOut();
 }).catch(function (err) {
 	// There was an error
 	console.warn('Something went wrong.', err);
