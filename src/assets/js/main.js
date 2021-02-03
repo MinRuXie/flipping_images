@@ -1,6 +1,6 @@
-fetch('src/assets/data/images.json').then(function (response) {
-    return response.json();
-}).then(function (data) {
+async function init() {
+    let response = await fetch('src/assets/data/images.json');
+    let data = await response.json();
 
     let img_cover = data.card_back; // 卡背圖片
     let img_array = data.card_fronts; // 圖片種類
@@ -340,13 +340,11 @@ fetch('src/assets/data/images.json').then(function (response) {
         //--------------------
 
         // 建立遊戲卡片
-        createCards();
+        createCards();      
     });
-})
-.then(function () {
+};
+
+init().then(function() {
     // 隱藏載入畫面
     $('#js-loading').fadeOut();
-}).catch(function (err) {
-	// There was an error
-	console.warn('Something went wrong.', err);
 });
