@@ -340,11 +340,15 @@ async function init() {
         //--------------------
 
         // 建立遊戲卡片
-        createCards();      
+        createCards();
+
+        
     });
 };
 
 init().then(function() {
-    // 隱藏載入畫面
-    $('#js-loading').fadeOut();
+    window.onload = function(){
+        // 隱藏載入畫面
+        $('#js-loading').fadeOut();
+    }
 });
