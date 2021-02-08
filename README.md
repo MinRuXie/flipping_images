@@ -56,14 +56,14 @@ gulp build
 * Add new images file to `dist/assets/img` folder.
 
 
-## 音效檔案來源
-* 背景音樂
-    - 來源：[西野加奈／喜歡你的理由 (中文字幕短版MV)](https://www.youtube.com/watch?v=9FCCYhLi6sc&list=LLfbRY728DLyrjq2eRlkvA_w&index=516)
+## Audio Resource
+* Background music
+    - Resource[西野加奈／喜歡你的理由 (中文字幕短版MV)](https://www.youtube.com/watch?v=9FCCYhLi6sc&list=LLfbRY728DLyrjq2eRlkvA_w&index=516)
 * `corret.wav`
-    - 來源：[Correct Answer / That's Right!](https://freesound.org/people/Beetlemuse/sounds/528957/)
+    - Resource[Correct Answer / That's Right!](https://freesound.org/people/Beetlemuse/sounds/528957/)
 * `incorrect.wav`
-    - 來源：[Game Sounds » Game Sound Wrong.wav](https://freesound.org/people/Bertrof/sounds/131657/)
+    - Resource[Game Sounds » Game Sound Wrong.wav](https://freesound.org/people/Bertrof/sounds/131657/)
 * `flipping.wav`
-    - 來源：[Book, Flipping Through Pages, A.wav](https://freesound.org/people/InspectorJ/sounds/416179/)
+    - Resource[Book, Flipping Through Pages, A.wav](https://freesound.org/people/InspectorJ/sounds/416179/)
 * `start.ogg`
-    - 來源：[Arcade » Game Start](https://freesound.org/people/plasterbrain/sounds/243020/)
+    - Resource[Arcade » Game Start](https://freesound.org/people/plasterbrain/sounds/243020/)
