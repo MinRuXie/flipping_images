@@ -346,16 +346,6 @@ async function init() {
 };
 
 init().then(function() {
-    // window.onload = function(){
-    //     // 隱藏載入畫面
-    //     $('#js-loading').fadeOut();
-    // }
-
-    // if (document.readyState === "complete" || document.readyState === "interactive") {
-    //     // 隱藏載入畫面
-    //     $('#js-loading').fadeOut();
-    // }
-
     let flag = true;
 
     function determineLoadState() {
