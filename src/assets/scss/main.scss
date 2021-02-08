@@ -103,62 +103,62 @@ img {
     display: flex;
     align-items: center;
     justify-content: center;
+}
 
-    .card-wrap {
+.card-wrap {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    grid-column-gap: 30px;
+    grid-row-gap: 10px;
+    align-items: center;
+    padding: 20px;
+
+    .card {
         width: 100%;
-        height: 100%;
-        display: grid;
-        grid-template-columns: repeat(8, 1fr);
-        grid-column-gap: 30px;
-        grid-row-gap: 10px;
-        align-items: center;
-        padding: 20px;
+        height: 0;
+        padding-bottom: 151.25%;
+        position: relative;
+        overflow: hidden;
+        border-radius: 10px;
+        margin: auto;
 
-        .card {
+        /*preserve the back when fliping*/
+        transform-style: preserve-3d;
+        transition: 0.5s all ease;
+
+        &.exist {
+            cursor: pointer;
+            box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+        }
+
+        &.flipped-b-to-f {          
+            transform: rotateY(180deg);
+        }
+
+        &.flipped-f-to-b {          
+            transform: rotateY(0);
+        }
+
+        img {
             width: 100%;
-            height: 0;
-            padding-bottom: 151.25%;
-            position: relative;
-            overflow: hidden;
-            border-radius: 10px;
-            margin: auto;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
 
-            /*preserve the back when fliping*/
-            transform-style: preserve-3d;
-            transition: 0.5s all ease;
-
-            &.exist {
-                cursor: pointer;
-                box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+            &.card-back {
+                z-index: 2;
+                backface-visibility: hidden;
+                background-color: $color-white;
             }
-
-            &.flipped-b-to-f {          
+            
+            &.card-front {
+                z-index: 1;
+                transform-style: preserve-3d;
                 transform: rotateY(180deg);
-            }
-
-            &.flipped-f-to-b {          
-                transform: rotateY(0);
-            }
-
-            img {
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-                position: absolute;
-                top: 0;
-                left: 0;
-
-                &.card-back {
-                    z-index: 2;
-                    backface-visibility: hidden;
-                    background-color: $color-white;
-                }
-                
-                &.card-front {
-                    z-index: 1;
-                    transform-style: preserve-3d;
-                    transform: rotateY(180deg);
-                }
             }
         }
     }
@@ -182,6 +182,16 @@ img {
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    position: relative;
+
+    .ready-bg-wrap {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -1;
+        background-color: $color-yellow;
+        opacity: 0.2;
+    }
 
     .game-rule {
         width: 600px;
