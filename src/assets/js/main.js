@@ -22,7 +22,6 @@ async function init() {
     // HTML 讀取後執行
     $(function(){
         // let bg_player = document.getElementById('js-bg-player');
-        // bg_player.loop = true;
         let correct_player = document.getElementById('js-correct-player');
         let incorrect_player = document.getElementById('js-incorrect-player');
         let flipping_player = document.getElementById('js-flipping-player');
@@ -38,17 +37,17 @@ async function init() {
         let $reward_wrap = $('#js-reward-wrap');
 
         // 要使用幾種圖案
-        let img_type_count = 12;
+        let img_kinds_count = 12;
 
         // 複製雙倍陣列元素 (生成元素) 
         let dbl_img_array = [];
 
         // 記錄目前場上剩下的卡片
-        let cur_img_array = [];
+        let cur_rest_cards_array = [];
 
         // 記錄目前翻開的卡片
-        let open_count = 0; // 翻開個數
-        let open_card_array = []; // 翻開元素
+        let cur_open_cards_count = 0; // 翻開個數
+        let cur_open_cards_array = []; // 翻開元素
 
         // 遊戲時間
         let s_timer;
@@ -56,7 +55,7 @@ async function init() {
         let sec = 0;
 
         // 玩家成績
-        let scores = [];
+        let scores = []; // {"sec": "", "name": ""}
 
         //--------------------
         // 自定義 function
@@ -71,22 +70,22 @@ async function init() {
             shuffle(copy_img_array);
 
             // 取出此回合的 X 種圖片
-            let new_img_array = copy_img_array.slice(0, img_type_count);
+            let new_img_array = copy_img_array.slice(0, img_kinds_count);
 
             // 複製雙倍陣列元素 (生成元素)
             dbl_img_array = new_img_array.concat(new_img_array);
 
             // 記錄目前場上剩下的卡片
-            cur_img_array = [];
-            for(let p=0 ; p < new_img_array.length ; p++){
-                cur_img_array.push(new_img_array[p]);
+            cur_rest_cards_array = [];
+            for (let p=0 ; p < new_img_array.length ; p++) {
+                cur_rest_cards_array.push(new_img_array[p]);
             }
 
             // 清空容器
             $card_wrap.empty();
 
             // 加入卡片圖片
-            for(let i=0 ; i < dbl_img_array.length ; i++) {
+            for (let i=0 ; i < dbl_img_array.length ; i++) {
                 $card_wrap.append(
                     `<div class="card exist">
                         <img class="card-back" src="${img_cover}" draggable="false" />
@@ -102,7 +101,7 @@ async function init() {
             min = 0;
             sec = 0;
 
-            $timer.text(`${min.toString().padStart(2, 0)}:${sec.toString().padStart(2, 0)}`);
+            $timer.text(`${timeFormat(min)}:${timeFormat(sec)}`);
 
             // 每秒執行
             s_timer = setInterval(function() {
@@ -119,7 +118,7 @@ async function init() {
 
         /* 判斷遊戲進度 */
         async function deterGameProgress() {
-            if(cur_img_array.length <= 0) {
+            if(cur_rest_cards_array.length <= 0) {
                 // 停止計時器
                 await clearInterval(s_timer);
 
@@ -146,15 +145,15 @@ async function init() {
             // 玩家姓名
             let person = prompt(`遊戲結束！${message}共花費${timeFormat(min)}分${timeFormat(sec)}秒！\n請輸入您的大名：`, "讓我想想");
 
-            if(person == null) {
+            if (person == null) {
                 person = "無名氏";
             }
 
             scores.push({'sec': timeFormat(spend_secs), 'name': person});
-            scores.sort(sortIdAsc);
+            scores.sort(sortIdAsc); // 升序排序
 
             $history_list.empty();
-            for(let i=0 ; i < scores.length ; i++) {
+            for (let i=0 ; i < scores.length ; i++) {
                 $history_list.append(`<li>${scores[i].name} ${scores[i].sec}秒</li>`);
             }
         }
@@ -179,8 +178,8 @@ async function init() {
 
         /* 重置預設值 */
         function resetGame() {
-            open_count = 0; // 歸 0
-            open_card_array = []; // 清除陣列
+            cur_open_cards_count = 0; // 歸 0
+            cur_open_cards_array = []; // 清除陣列
         }
 
         /* 時間格式 */
@@ -188,6 +187,11 @@ async function init() {
             return (time < 10) ? `0${time}` : time;
         }
 
+        /* play audio */
+        function playAudio(player) {
+            player.currentTime = 0;
+            player.play();
+        }
 
         //--------------------
         // 外部 function
@@ -204,7 +208,7 @@ async function init() {
 
         /* 从小到大 升序排序 json */
         // https://blog.csdn.net/u011019468/article/details/89931940
-        function sortIdAsc(a,b){
+        function sortIdAsc(a,b) {
             return a.sec-b.sec;
         }
 
@@ -214,8 +218,8 @@ async function init() {
 
         /* 開始遊戲 */
         $start_btn.on('click', function() {
-            start_player.currentTime = 0;
-            start_player.play();
+            // 播放音效
+            playAudio(start_player);
 
             // 隱藏準備畫面
             $('#js-ready').fadeOut();
@@ -232,8 +236,8 @@ async function init() {
 
         /* 重新開始 */
         $restart_btn.on('click', function() {
-            start_player.currentTime = 0;
-            start_player.play();
+            // 播放音效
+            playAudio(start_player);
 
             // 停止計時器 (重新開局)
             clearInterval(s_timer);
@@ -250,20 +254,19 @@ async function init() {
 
         /* 卡片點擊事件: 給未來新增的元素也綁上事件 */
         $(document).on('click', '.exist', function() {
-            flipping_player.currentTime = 0;
-            flipping_player.play();
+            playAudio(flipping_player);
 
             // 紀錄翻開個數
-            open_count++;
+            cur_open_cards_count++;
 
             // 翻牌效果: 清除
             $(this).removeClass('flipped-b-to-f');
             $(this).removeClass('flipped-f-to-b');
 
             // 防止點擊超過兩張
-            if(open_count <= 2){
+            if(cur_open_cards_count <= 2){
                 // 記錄翻開圖片
-                open_card_array.push($(this));
+                cur_open_cards_array.push($(this));
 
                 // 隱藏卡背圖片
                 $(this).find('img').eq(0).fadeOut();
@@ -272,15 +275,15 @@ async function init() {
                 $(this).addClass('flipped-b-to-f');
 
                 // 暫時移除元素的事件綁定 (為了防止重複點選)
-                for(let y=0 ; y < open_card_array.length ; y++) {
-                    open_card_array[y].removeClass('exist');
-                    open_card_array[y].removeClass('exist');
+                for(let y=0 ; y < cur_open_cards_array.length ; y++) {
+                    cur_open_cards_array[y].removeClass('exist');
+                    cur_open_cards_array[y].removeClass('exist');
                 }
             
                 // 選取兩張
-                if(open_card_array.length == 2) {
-                    let img_1 = open_card_array[0].find('img');
-                    let img_2 = open_card_array[1].find('img');
+                if(cur_open_cards_array.length == 2) {
+                    let img_1 = cur_open_cards_array[0].find('img');
+                    let img_2 = cur_open_cards_array[1].find('img');
 
                     setTimeout(function() {
                         // 兩張一樣: 隱藏元素
@@ -288,14 +291,13 @@ async function init() {
                             
                             new Promise(function(myResolve, myReject) {
                                 // 播放音效
-                                correct_player.currentTime = 0;
-                                correct_player.play();
+                                playAudio(correct_player);
                                 
                                 img_1.fadeOut();
                                 img_2.fadeOut();
 
                                 // 移除陣列元素
-                                cur_img_array.splice(cur_img_array.indexOf(img_1.eq(1).attr('src')), 1);
+                                cur_rest_cards_array.splice(cur_rest_cards_array.indexOf(img_1.eq(1).attr('src')), 1);
                                 
                                 myResolve(); // when successful
                                 myReject();  // when error
@@ -310,21 +312,20 @@ async function init() {
                         // 兩張不一樣: 還原卡背圖片
                         } else {
                             // 播放音效
-                            incorrect_player.currentTime = 0;
-                            incorrect_player.play();
+                            playAudio(incorrect_player);
                             
                             img_1.eq(0).fadeIn();
                             img_2.eq(0).fadeIn();
 
                             // 翻牌效果: 正到反
-                            for(let y=0 ; y < open_card_array.length ; y++) {
-                                open_card_array[y].addClass('flipped-f-to-b');
-                                open_card_array[y].addClass('flipped-f-to-b');
+                            for(let y=0 ; y < cur_open_cards_array.length ; y++) {
+                                cur_open_cards_array[y].addClass('flipped-f-to-b');
+                                cur_open_cards_array[y].addClass('flipped-f-to-b');
                             }
 
                             // 復原元素的事件綁定 (為了防止重複點選)
-                            open_card_array[0].addClass('exist');
-                            open_card_array[1].addClass('exist');
+                            cur_open_cards_array[0].addClass('exist');
+                            cur_open_cards_array[1].addClass('exist');
                         }
 
                         // 重置預設值
@@ -341,8 +342,6 @@ async function init() {
 
         // 建立遊戲卡片
         createCards();
-
-        
     });
 };
 
@@ -360,7 +359,7 @@ init().then(function() {
     let flag = true;
 
     function determineLoadState() {
-        console.log('loading...');
+        console.log('Loading...');
 
         switch(document.readyState) {
             case 'interactive':
@@ -372,6 +371,7 @@ init().then(function() {
 
         if (!flag) {
             clearInterval(timer);
+            console.log('Ready!');
         }
     }
 
