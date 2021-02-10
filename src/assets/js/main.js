@@ -75,6 +75,9 @@ async function init() {
             // 複製雙倍陣列元素 (生成元素)
             dbl_img_array = new_img_array.concat(new_img_array);
 
+            // 亂數排序陣列元素
+            shuffle(dbl_img_array);
+
             // 記錄目前場上剩下的卡片
             cur_rest_cards_array = [];
             for (let p=0 ; p < new_img_array.length ; p++) {
@@ -134,9 +137,9 @@ async function init() {
         function recordScore() {
             let spend_secs = min * 60 + sec;
             let message = "";
-            if (spend_secs <= 20) {
+            if (spend_secs <= 40) {
                 message = "這麼快速一定是真愛粉！";
-            } else if (spend_secs <= 40 ) {
+            } else if (spend_secs <= 70 ) {
                 message = "回去多練習吧！";
             } else {
                 message = "太可憐了...";
