@@ -84,6 +84,8 @@ async function init() {
                 cur_rest_cards_array.push(new_img_array[p]);
             }
 
+            // 淡出畫面
+            $card_wrap.fadeOut();
             // 清空容器
             $card_wrap.empty();
 
@@ -96,6 +98,9 @@ async function init() {
                     </div>`
                 );
             }
+
+            // 淡入畫面
+            $card_wrap.fadeIn();
         }
 
         /* 計算遊戲時間 */
