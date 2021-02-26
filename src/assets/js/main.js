@@ -349,7 +349,6 @@ async function init() {
 };
 
 init().then(function() {
-    let flag = true;
 
     function determineLoadState() {
         console.log('Loading...');
@@ -358,13 +357,9 @@ init().then(function() {
             case 'interactive':
             case 'complete':
                 $('#js-loading').fadeOut(); // 隱藏載入畫面
-                flag = false;
+                clearInterval(timer);
+                console.log('Ready!');
                 break;
-        }
-
-        if (!flag) {
-            clearInterval(timer);
-            console.log('Ready!');
         }
     }
 
