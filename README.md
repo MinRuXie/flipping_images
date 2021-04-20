@@ -48,13 +48,22 @@ project
 ```
 
 ## Gulp
-* gulp-sass：compile SCSS to CSS
-* gulp-clean-css：minify CSS
+* gulp-sass：compile SCSS file to CSS file, and output minify file.
 * gulp-terser：minify ES6 JS
+* gulp-imagemin: compress images
+* gulp-del: delete files
 
+### Command
 Process file from `src` folder to `dist` folder.
+
+#### update
 ```
 gulp build
+```
+
+#### only update images
+```
+gulp compressImages
 ```
 
 ## Update Data Method
