@@ -19,6 +19,7 @@
 * Javascript
 * HTML
 * SCSS
+* AJAX
 
 ## Project Structure
 ```
